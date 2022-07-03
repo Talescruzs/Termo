@@ -11,10 +11,10 @@ class StartGame:
             inputText = str()
             while(len(inputText)!=len(rightWord)):
                 inputText = input("digita uma palavra com %d letras: " %len(rightWord))
-                if len(inputText)!=5:
+                if len(inputText)!=len(rightWord):
                     print("OOOO CABEÇA DE CAVALO...")
-            comparaPalavra = CompareWord(inputText=inputText, rightText=rightWord)
-            result = comparaPalavra.retorno()
+            compare = CompareWord(inputText=inputText, rightText=rightWord)
+            result = compare.retorno()
 
 
 if __name__ == '__main__':
