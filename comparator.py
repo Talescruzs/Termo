@@ -3,7 +3,7 @@ class CompareWord():
         self.result = None
         self.difpos = set()
         self.equalpos = set()
-        self.inters = set()
+        self.union = set()
         self.inputText = list()
         self.rightText = list()
         for word in inputText:
@@ -15,12 +15,12 @@ class CompareWord():
             self.result = True
         else:
             for letter in range(len(self.rightText)):
-                if self.rightText[letter] in self.inputText and self.rightText[letter] not in self.inters:
+                if self.rightText[letter] in self.inputText and self.inputText[letter] not in self.union:
                     if self.rightText[letter] == self.inputText[letter]:
                         self.equalpos.add(self.rightText[letter])
                     else:
                         self.difpos.add(self.rightText[letter])
-                self.inters = self.equalpos.union(self.difpos)
+                self.union = self.equalpos.union(self.difpos)
             self.result = False
 
     def outcome(self):
@@ -29,7 +29,7 @@ class CompareWord():
         else:
             print("As letras a seguir estão na palavra:")
             for letter in self.inputText:
-                if letter in self.inters:
+                if letter in self.union:
                     if letter in self.equalpos:
                         print("Posição correta:")
                     else:

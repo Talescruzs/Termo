@@ -11,7 +11,9 @@ class StartGame:
             inputText = str()
             while(len(inputText)!=len(rightWord)):
                 inputText = input("digita uma palavra com %d letras: " %len(rightWord))
-                if len(inputText)!=len(rightWord):
+                if inputText == "VersusMode":
+                    rightWord = input("digita a palavra para o seu adversário: ")
+                elif len(inputText)!=len(rightWord):
                     print("OOOO CABEÇA DE CAVALO...")
             compare = CompareWord(inputText=inputText, rightText=rightWord)
             result = compare.outcome()
