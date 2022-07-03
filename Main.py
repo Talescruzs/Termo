@@ -14,7 +14,7 @@ class StartGame:
                 if len(inputText)!=len(rightWord):
                     print("OOOO CABEÇA DE CAVALO...")
             compare = CompareWord(inputText=inputText, rightText=rightWord)
-            result = compare.retorno()
+            result = compare.outcome()
 
 
 if __name__ == '__main__':
