@@ -15,7 +15,7 @@ class StartGame:
                 rightWord = input("digita a palavra para o seu adversário: ")
                 break
             else:
-                print("OOOO CABEÇA DE CAVALO...")
+                print("OOOO CABEÇA DE CAVALO...\n")
 
         result = False
         while(result == False):
