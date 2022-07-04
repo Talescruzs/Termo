@@ -13,4 +13,4 @@ class WordsBase:
 
 if __name__ == '__main__':
     word = WordsBase()
-    word.returnWord()
+    print(word.returnWord())
