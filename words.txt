@@ -1,1 +1,1 @@
-teste,palavra,termo,ratinho,cavalo
+Palavra,Termo,Ratinho,Cavalo,Calvo,Mamaco,Paralelepipedo
