@@ -10,7 +10,10 @@ class Game:
         "Jogador define o modo de jogo"
         a = True
         while a:
-            choicedGameType = int(input("Tipos: \n1=Normal(apenas palavras de 5 letras) \n2=Hardcore(palavras de todos os tamanhos) \n3=Versus\nDigite qual modo queres: "))
+            choicedGameType = int(input(
+                "Tipos: \n1=Normal(apenas palavras de 5 letras) \n2=Hardcore(palavras de todos os tamanhos)" 
+                "\n3=Versus\nDigite qual modo queres: "
+                ))
             if choicedGameType == 1 or choicedGameType == 2:
                 word = WordsBase()
                 self.rightWord = word.returnWord(choiceGameType=choicedGameType)
@@ -31,7 +34,6 @@ class Game:
                 inputText = input("digita uma palavra com %d letras: " % len(self.rightWord)).lower()
                 if len(inputText) != len(self.rightWord):
                     print("OOOO CABEÇA DE CAVALO...são %d letras" %len(self.rightWord))
-
             compare.income(inputText=inputText, rightText=self.rightWord)
             result = compare.outcome()
 

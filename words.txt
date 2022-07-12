@@ -1,1 +1,1 @@
-Palavra,Termo,Ratinho,Cavalo,Calvo,Mamaco,Paralelepipedo
+Palavra,Termo,Ratinho,Cavalo,Calvo,Mamaco,Paralelepipedo,criador,coracao
