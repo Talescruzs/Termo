@@ -27,10 +27,10 @@ def main():
 
     txt = Text(Point(500, 600), text="")
     
-    while True:
-        if len(inputBox.getText())<=5:
-            resposta = inputBox.getText()
-            txt.setText(resposta)
+    
+    # if len(inputBox.getText())<=5:
+    #     resposta = inputBox.getText()
+    #     txt.setText(resposta)
 
     win.getMouse()
     win.close()
