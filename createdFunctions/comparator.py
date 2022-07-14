@@ -24,16 +24,19 @@ class CompareWord():
 
     def outcome(self):
         "Printa o resultado da comparação"
-        if self.result:
-            print("ACERTOU")
-        else:
-            print("Errou:")
-            for result in range(len(self.final)):
+        # if self.result:
+        #     print("ACERTOU")
+        # else:
+        #     print("Errou:")
+            # for result in range(len(self.final)):
                 # if self.final[result] != "Letra errada":      PODE SER USADO CASO QUEIRA MOSTRAR APENAS AS LETRAS QUE ESTÃO NA PALAVRA, EU ACHO MAIS CONFUSO
                 #     print("%s : %s" %(self.inputText[result], self.final[result]))
-                print("%s : %s" %(self.inputText[result], self.final[result])) 
-        self.final.clear()
+                # print("%s : %s" %(self.inputText[result], self.final[result])) 
         return self.result
 
     def overview(self):
-        return [self.inputText, self.final]
+        return self.final
+
+    def cleanFinal(self):
+        self.final.clear()
+

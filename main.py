@@ -46,18 +46,36 @@ class GameWithGraphics:
     def __congratulations(self):
         self.root = Tk()
         self.root.title("Acertou")      
-        title = Label(self.root, text="ACERTOUU")
+        title = Label(self.root, text="ACERTOUU NA RODADA %d" %self.counter)
         title.grid(row=1, column=1)
         self.root.mainloop()
 
     def __gameOverview(self, result):
-        pass
+        letter = str()
+        for a in range(len(self.inputText)):
+            if result[a] == "Posição certa":
+                letter = Label(
+                    self.root, text=self.inputText[a], bg="green", padx=10
+                    )
+            elif result[a] == "Posição errada":
+                letter = Label(
+                    self.root, text=self.inputText[a], bg="blue", padx=10
+                    )
+            else:
+                letter = Label(
+                    self.root, text=self.inputText[a], bg="white", padx=10
+                    )
+            letter.grid(row=(self.counter+4), column=a)
+        self.counter+=1
+
+
 
     def __getWord(self, word):
         self.inputText = word
+        self.field.delete(0, END)
         if len(self.inputText) != len(self.rightWord):
-            cavalo = Label(self.root, text="OOOOO CAVALO, SÃO %d LETRAS") %len(self.rightWord)
-            cavalo.grid(row=1, column=1)
+            cavalo = Label(self.root, text="OOOOO CAVALO, SÃO %d LETRAS"%len(self.rightWord)) 
+            cavalo.grid(row=1, column=0, columnspan=len(self.rightWord))
         else:
             compare = CompareWord()
             compare.income(inputText=self.inputText, rightText=self.rightWord)
@@ -66,8 +84,12 @@ class GameWithGraphics:
                 self.root.destroy()
                 self.__congratulations()
             else:
-                overview = compare.overview()
-                self.__gameOverview(overview)
+                if self.counter >= 5:
+                    pass
+                else:
+                    overview = compare.overview()
+                    self.__gameOverview(overview)
+                    compare.cleanFinal()
         
 
 
@@ -116,16 +138,15 @@ class GameWithGraphics:
         "Insere palavra do jogador e retorna se está certa ou não"
         self.root = Tk()
         self.root.title("Termo")
-
-        result = False
+        self.counter = 1
 
         title = Label(self.root, text="DIGITE A PALAVRA COM %d LETRAS" %len(self.rightWord))
-        field = Entry(self.root, width=50)
-        confirmWord = Button(self.root, text="CONFIRMAR PALAVRA", state=NORMAL, command=lambda: self.__getWord(field.get().lower()))
+        self.field = Entry(self.root, width=50)
+        confirmWord = Button(self.root, text="CONFIRMAR PALAVRA", state=NORMAL, command=lambda: self.__getWord(self.field.get().lower()))
 
-        title.grid(row=2, column=1)
-        field.grid(row=4, column=1)
-        confirmWord.grid(row=5, column=1)
+        title.grid(row=2, column=0, columnspan=len(self.rightWord))
+        self.field.grid(row=4, column=0, columnspan=len(self.rightWord))
+        confirmWord.grid(row=9, column=0, columnspan=len(self.rightWord))
 
         self.root.mainloop()
 
