@@ -85,7 +85,7 @@ class GameWithGraphics:
                 self.__congratulations()
             else:
                 if self.counter >= 5:
-                    pass
+                    pass #adicionar game over
                 else:
                     overview = compare.overview()
                     self.__gameOverview(overview)
