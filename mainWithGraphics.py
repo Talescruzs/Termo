@@ -8,9 +8,20 @@ class GameWithGraphics:
     
     def __congratulations(self):
         self.root = Tk()
-        self.root.title("Acertou")      
-        title = Label(self.root, text="ACERTOUU NA RODADA %d" %self.counter)
-        title.grid(row=1, column=1)
+        self.root.title("Acertou")   
+        self.root.resizable(False, False)
+        self.root.state("zoomed")    
+        title = Label(self.root, text="ACERTOUU NA RODADA %d" %self.counter, font="Arial 30 bold", fg="green")
+        title.place(relx=0.5, rely=0.25, anchor=CENTER)
+        self.root.mainloop()
+
+    def __gameOver(self):
+        self.root = Tk()
+        self.root.title("Game Over")   
+        self.root.resizable(False, False)
+        self.root.state("zoomed")    
+        title = Label(self.root, text="GAME OVER", font="Arial 30 bold", fg="red")
+        title.place(relx=0.5, rely=0.25, anchor=CENTER)
         self.root.mainloop()
 
     def __gameOverview(self, result):
@@ -18,17 +29,17 @@ class GameWithGraphics:
         for a in range(len(self.inputText)):
             if result[a] == "Posição certa":
                 letter = Label(
-                    self.root, text=self.inputText[a], bg="green", padx=10
+                    self.frame, text=self.inputText[a], bg="green", padx=10, 
                     )
             elif result[a] == "Posição errada":
                 letter = Label(
-                    self.root, text=self.inputText[a], bg="blue", padx=10
+                    self.frame, text=self.inputText[a], bg="blue", padx=10
                     )
             else:
                 letter = Label(
-                    self.root, text=self.inputText[a], bg="white", padx=10
+                    self.frame, text=self.inputText[a], bg="white", padx=10
                     )
-            letter.grid(row=(self.counter+4), column=a)
+            letter.grid(row=(self.counter+4), column=a) #usar frame
         self.counter+=1
 
 
@@ -37,8 +48,8 @@ class GameWithGraphics:
         self.inputText = word
         self.field.delete(0, END)
         if len(self.inputText) != len(self.rightWord):
-            cavalo = Label(self.root, text="OOOOO CAVALO, SÃO %d LETRAS"%len(self.rightWord)) 
-            cavalo.grid(row=1, column=0, columnspan=len(self.rightWord))
+            cavalo = Label(self.root, text="OOOOO CAVALO, SÃO %d LETRAS"%len(self.rightWord), font="Arial 15", fg="red") 
+            cavalo.place(relx=0.5, rely=0.05, anchor=CENTER)
         else:
             compare = CompareWord()
             compare.income(inputText=self.inputText, rightText=self.rightWord)
@@ -48,14 +59,12 @@ class GameWithGraphics:
                 self.__congratulations()
             else:
                 if self.counter >= 5:
-                    pass #adicionar game over
+                    self.root.destroy()
+                    self.__gameOver()
                 else:
                     overview = compare.overview()
                     self.__gameOverview(overview)
                     compare.cleanFinal()
-        
-
-
 
     def __getRightWord(self, rightWord):
         self.rightWord = rightWord
@@ -69,14 +78,16 @@ class GameWithGraphics:
 
         elif choicedGameType == 3:
             self.root = Tk()
-            self.root.title("Seleção de palavra para  modo versus")      
-            title = Label(self.root, text="DIGITE A PALAVRA PARA O SEU ADVERSÁRIO")
-            field = Entry(self.root, width=50)
-            confirm = Button(self.root, text="CONFIRMAR PALAVRA", state=NORMAL, command=lambda: self.__getRightWord(field.get().lower()))
+            self.root.title("Seleção de palavra para  modo versus")
+            self.root.resizable(False, False)
+            self.root.state("zoomed")      
+            title = Label(self.root, text="DIGITE A PALAVRA PARA O SEU ADVERSÁRIO", font="Arial 24 bold")
+            field = Entry(self.root, font="Arial 15 bold", width=50)
+            confirm = Button(self.root, text="CONFIRMAR PALAVRA", font="Arial 15 bold", state=NORMAL, command=lambda: self.__getRightWord(field.get().lower()))
 
-            title.grid(row=0, column=1)
-            field.grid(row=2, column=1)
-            confirm.grid(row=3, column=1)
+            title.place(relx=0.5, rely=0.15, anchor=CENTER)
+            field.place(relx=0.5, rely=0.25, anchor=CENTER)
+            confirm.place(relx=0.5, rely=0.35, anchor=CENTER)
             self.root.mainloop()
 
         self.startGame()
@@ -85,31 +96,37 @@ class GameWithGraphics:
         "Jogador define o modo de jogo"
         self.root = Tk()
         self.root.title("Seleção de tipo de jogo")
-        title = Label(self.root, text="SELECIONE O TIPO DE JOGO:")
-        button1 = Button(self.root, text="Normal(apenas palavras de 5 letras)", state=NORMAL, command=lambda: self.__gameType(1))
-        button2 = Button(self.root, text="Hardcore(palavras de todos os tamanhos)", state=NORMAL, command=lambda: self.__gameType(2))
-        button3 = Button(self.root, text="Versus", state=NORMAL, command=lambda: self.__gameType(3))
-        
-        title.grid(row=0, column=1)
-        button1.grid(row=3, column=1)
-        button2.grid(row=3, column=3)
-        button3.grid(row=3, column=5)
+        self.root.resizable(False, False)
+        self.root.state("zoomed")
 
+        title = Label(self.root, text="SELECIONE O TIPO DE JOGO:", font="Arial 24 bold")
+        button1 = Button(self.root, text="Normal(apenas palavras de 5 letras)", font="Arial 15 bold", state=NORMAL, command=lambda: self.__gameType(1))
+        button2 = Button(self.root, text="Hardcore(palavras de todos os tamanhos)", font="Arial 15 bold", state=NORMAL, command=lambda: self.__gameType(2))
+        button3 = Button(self.root, text="Versus", font="Arial 15 bold", state=NORMAL, command=lambda: self.__gameType(3))
+        
+        title.place(relx=0.5, rely=0.15, anchor=CENTER)
+        button1.place(relx=0.5, rely=0.25, anchor=CENTER)
+        button2.place(relx=0.5, rely=0.35, anchor=CENTER)
+        button3.place(relx=0.5, rely=0.45, anchor=CENTER)
         self.root.mainloop()
 
     def startGame(self):
         "Insere palavra do jogador e retorna se está certa ou não"
         self.root = Tk()
         self.root.title("Termo")
+        self.root.resizable(False, False)
+        self.root.state("zoomed")
+        self.frame = Frame(self.root, width=50)
         self.counter = 1
 
-        title = Label(self.root, text="DIGITE A PALAVRA COM %d LETRAS" %len(self.rightWord))
-        self.field = Entry(self.root, width=50)
-        confirmWord = Button(self.root, text="CONFIRMAR PALAVRA", state=NORMAL, command=lambda: self.__getWord(self.field.get().lower()))
+        title = Label(self.root, text="DIGITE A PALAVRA COM %d LETRAS" %len(self.rightWord), font="Arial 24 bold")
+        self.field = Entry(self.root, width=50, font="Arial 15 bold")
+        confirmWord = Button(self.root, text="CONFIRMAR PALAVRA", state=NORMAL, font="Arial 15 bold", command=lambda: self.__getWord(self.field.get().lower()))
 
-        title.grid(row=2, column=0, columnspan=len(self.rightWord))
-        self.field.grid(row=4, column=0, columnspan=len(self.rightWord))
-        confirmWord.grid(row=9, column=0, columnspan=len(self.rightWord))
+        title.place(relx=0.5, rely=0.15, anchor=CENTER)
+        self.field.place(relx=0.5, rely=0.25, anchor=CENTER)
+        confirmWord.place(relx=0.5, rely=0.55, anchor=CENTER)
+        self.frame.place(relx=0.5, rely=0.40, anchor=CENTER)
 
         self.root.mainloop()
 
