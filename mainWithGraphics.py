@@ -5,6 +5,10 @@ from tkinter import *
 class GameWithGraphics:
     def __init__(self):
         self.rightWord = str()
+
+    def __again(self):
+        self.root.destroy()
+        self.selectGameType()
     
     def __congratulations(self):
         self.root = Tk()
@@ -12,7 +16,9 @@ class GameWithGraphics:
         self.root.resizable(False, False)
         self.root.state("zoomed")    
         title = Label(self.root, text="ACERTOUU NA RODADA %d" %self.counter, font="Arial 30 bold", fg="green")
+        confirm = Button(self.root, text="JOGAR NOVAMENTE", font="Arial 15 bold", state=NORMAL, command=lambda: self.__again())
         title.place(relx=0.5, rely=0.25, anchor=CENTER)
+        confirm.place(relx=0.5, rely=0.50, anchor=CENTER)
         self.root.mainloop()
 
     def __gameOver(self):
@@ -21,7 +27,9 @@ class GameWithGraphics:
         self.root.resizable(False, False)
         self.root.state("zoomed")    
         title = Label(self.root, text="GAME OVER", font="Arial 30 bold", fg="red")
+        confirm = Button(self.root, text="JOGAR NOVAMENTE", font="Arial 15 bold", state=NORMAL, command=lambda: self.__again())
         title.place(relx=0.5, rely=0.25, anchor=CENTER)
+        confirm.place(relx=0.5, rely=0.50, anchor=CENTER)
         self.root.mainloop()
 
     def __gameOverview(self, result):
